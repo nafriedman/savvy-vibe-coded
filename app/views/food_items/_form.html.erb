@@ -1,0 +1,79 @@
+<%= form_with(model: food_item, class: "food-item-form") do |form| %>
+  <% if food_item.errors.any? %>
+    <div class="error-messages">
+      <h3><%= pluralize(food_item.errors.count, "error") %> prohibited this food item from being saved:</h3>
+      <ul>
+        <% food_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label_tag :food_name, "Food Type" %>
+    <%= text_field_tag :food_name, @food_name || food_item.food&.name, class: "form-control", placeholder: "e.g., Salmon, Pizza, Broccoli", required: true %>
+    <small>Enter the general food type. If it doesn't exist, it will be created automatically.</small>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :food_category, "Category" %>
+    <%= select_tag :food_category, options_for_select([['Fresh', 'fresh'], ['Prepared', 'prepared'], ['Pantry', 'pantry']], @food_category || food_item.food&.category), { prompt: "Select category", class: "form-control", required: true } %>
+    <small>Fresh (produce, meat), Prepared (leftovers), or Pantry (non-perishable)</small>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name, "Specific Item Name" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "e.g., Fresh Atlantic Salmon, Pepperoni Pizza" %>
+    <small>Optional: Add more details to distinguish this specific item</small>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <%= form.label :quantity %>
+      <%= form.number_field :quantity, step: 0.001, class: "form-control", placeholder: "1.5" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :unit %>
+      <%= form.text_field :unit, class: "form-control", placeholder: "lbs, oz, pieces, etc." %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :storage_location %>
+    <%= form.text_field :storage_location, class: "form-control", placeholder: "Fridge, Freezer, Pantry, etc." %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, FoodItem.statuses.keys.map { |k| [k.humanize, k] }, {}, class: "form-control" %>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <%= form.label :expiration_date %>
+      <%= form.date_field :expiration_date, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :purchase_date %>
+      <%= form.date_field :purchase_date, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cost %>
+    <%= form.number_field :cost, step: 0.01, class: "form-control", placeholder: "9.99" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :notes %>
+    <%= form.text_area :notes, rows: 4, class: "form-control", placeholder: "Any additional notes..." %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", food_items_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

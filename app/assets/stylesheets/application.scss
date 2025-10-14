@@ -1,0 +1,867 @@
+// Sassy
+
+// Variables
+$primary: #2563eb;
+$success: #10b981;
+$warning: #f59e0b;
+$danger: #ef4444;
+
+$expired: #dc2626;
+$expiring-soon: #ea580c;
+$expiring-week: #f59e0b;
+$fresh: #10b981;
+
+$bg: #f1f5f9;
+$card-bg: #ffffff;
+$text: #0f172a;
+$text-muted: #64748b;
+$border: #e2e8f0;
+$shadow: rgba(0, 0, 0, 0.05);
+$shadow-hover: rgba(0, 0, 0, 0.1);
+
+// Base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+// Navbar
+.navbar {
+  background: white;
+  border-bottom: 1px solid $border;
+  box-shadow: 0 1px 3px $shadow;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0.875rem 1rem;
+  }
+}
+
+.navbar-brand {
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: $text;
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 1.125rem;
+    gap: 0.5rem;
+  }
+}
+
+.logo-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+
+  @media (max-width: 640px) {
+    font-size: 1.5rem;
+  }
+}
+
+.logo-text {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (max-width: 640px) {
+    gap: 1rem;
+  }
+}
+
+.nav-link {
+  color: $text;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba($primary, 0.1);
+    color: $primary;
+  }
+
+  &.active {
+    color: $primary;
+    background: rgba($primary, 0.1);
+  }
+
+  @media (max-width: 640px) {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.625rem;
+  }
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.nav-btn {
+  background: $primary;
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    background: darken($primary, 8%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($primary, 0.3);
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+// Layout
+.page-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $text;
+
+    @media (max-width: 640px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.btn-add {
+  background: $primary;
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: darken($primary, 8%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($primary, 0.3);
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+// Filter Section
+.filter-section {
+  background: white;
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px $shadow;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 640px) {
+    padding: 0.75rem;
+  }
+}
+
+.filter-form {
+  margin: 0;
+}
+
+.filter-compact {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    gap: 0.5rem;
+  }
+}
+
+.filter-compact-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid $border;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: $text;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  min-width: 120px;
+
+  &:hover {
+    border-color: $primary;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+
+  @media (max-width: 640px) {
+    font-size: 0.8125rem;
+    padding: 0.45rem 0.625rem;
+    min-width: 100px;
+  }
+}
+
+.filter-clear-btn {
+  padding: 0.5rem 1rem;
+  background: rgba($text-muted, 0.1);
+  color: $text-muted;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba($text-muted, 0.2);
+    color: $text;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.45rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+}
+
+// Cards Grid
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+// Card
+.card {
+  background: $card-bg;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px $shadow;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-left: 3px solid transparent;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px $shadow-hover;
+  }
+
+  &.expired {
+    border-left-color: $expired;
+  }
+
+  &.expiring-soon {
+    border-left-color: $expiring-soon;
+  }
+
+  &.expiring-this-week {
+    border-left-color: $expiring-week;
+  }
+
+  &.fresh {
+    border-left-color: $fresh;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.875rem;
+    border-radius: 0.625rem;
+  }
+}
+
+.card-link {
+  text-decoration: none;
+  color: $text;
+  display: block;
+}
+
+.card-top {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid $border;
+}
+
+.card-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+
+  @media (max-width: 640px) {
+    font-size: 0.9375rem;
+  }
+}
+
+.card-category {
+  font-size: 0.75rem;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 500;
+
+  @media (max-width: 640px) {
+    font-size: 0.6875rem;
+  }
+}
+
+.card-info {
+  margin-bottom: 0.75rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 0.8125rem;
+  }
+}
+
+.info-label {
+  color: $text-muted;
+  font-size: 0.8125rem;
+
+  @media (max-width: 640px) {
+    font-size: 0.75rem;
+  }
+}
+
+.info-value {
+  color: $text;
+  font-weight: 500;
+}
+
+.card-expiry {
+  background: lighten($bg, 2%);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+
+  @media (max-width: 640px) {
+    padding: 0.625rem;
+  }
+}
+
+.expiry-label {
+  font-size: 0.6875rem;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.expiry-date {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+
+  &.expired {
+    color: $expired;
+  }
+
+  &.expiring-soon {
+    color: $expiring-soon;
+  }
+
+  &.expiring-this-week {
+    color: $expiring-week;
+  }
+
+  &.fresh {
+    color: $fresh;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 1rem;
+  }
+}
+
+.expiry-countdown {
+  font-size: 0.75rem;
+  color: $text-muted;
+
+  @media (max-width: 640px) {
+    font-size: 0.6875rem;
+  }
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+
+  @media (max-width: 640px) {
+    gap: 0.375rem;
+  }
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.consumed {
+    background: rgba($success, 0.1);
+    color: $success;
+
+    &:hover {
+      background: rgba($success, 0.2);
+    }
+  }
+
+  &.thrown {
+    background: rgba($danger, 0.1);
+    color: $danger;
+
+    &:hover {
+      background: rgba($danger, 0.2);
+    }
+  }
+
+  &.edit {
+    background: rgba($text-muted, 0.1);
+    color: $text-muted;
+
+    &:hover {
+      background: rgba($text-muted, 0.2);
+    }
+  }
+
+  @media (max-width: 640px) {
+    font-size: 0.75rem;
+    padding: 0.45rem;
+  }
+}
+
+.card-status-badge {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba($text-muted, 0.1);
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  color: $text-muted;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// Empty state
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px $shadow;
+
+  p {
+    font-size: 1rem;
+    color: $text-muted;
+    margin-bottom: 1rem;
+  }
+}
+
+// Detail page (keep existing)
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid $border;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text;
+  }
+
+  div {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px $shadow-hover;
+  }
+}
+
+.btn-primary {
+  background: $primary;
+  color: white;
+
+  &:hover {
+    background: darken($primary, 8%);
+  }
+}
+
+.btn-secondary {
+  background: $text-muted;
+  color: white;
+
+  &:hover {
+    background: darken($text-muted, 8%);
+  }
+}
+
+.btn-warning {
+  background: $warning;
+  color: white;
+
+  &:hover {
+    background: darken($warning, 8%);
+  }
+}
+
+.btn-danger {
+  background: $danger;
+  color: white;
+
+  &:hover {
+    background: darken($danger, 8%);
+  }
+}
+
+.btn-success {
+  background: $success;
+  color: white;
+
+  &:hover {
+    background: darken($success, 8%);
+  }
+}
+
+.btn-info {
+  background: $primary;
+  color: white;
+
+  &:hover {
+    background: darken($primary, 8%);
+  }
+}
+
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+// Forms
+.food-item-form {
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px $shadow;
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: $text-muted;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid $border;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+}
+
+select.form-control {
+  background: white;
+  cursor: pointer;
+}
+
+textarea.form-control {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid $border;
+}
+
+.error-messages {
+  background: rgba($danger, 0.1);
+  border: 1px solid $danger;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    color: $danger;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    margin-left: 1.5rem;
+    color: $danger;
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+}
+
+// Detail page
+.detail-card {
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px $shadow;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.detail-row {
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid $border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  strong {
+    flex: 0 0 200px;
+    font-weight: 500;
+    color: $text-muted;
+  }
+}
+
+.status-actions-large {
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px $shadow;
+  padding: 2rem;
+  margin-bottom: 2rem;
+
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  form {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+}
+
+.danger-zone {
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px $shadow;
+  padding: 2rem;
+  border: 2px solid $danger;
+}
+
+// Badges
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  &.badge-available {
+    background: rgba($success, 0.1);
+    color: darken($success, 10%);
+  }
+
+  &.badge-consumed {
+    background: rgba($text-muted, 0.1);
+    color: darken($text-muted, 10%);
+  }
+
+  &.badge-thrown_out {
+    background: rgba($danger, 0.1);
+    color: darken($danger, 10%);
+  }
+
+  &.badge-given_away {
+    background: rgba($primary, 0.1);
+    color: darken($primary, 10%);
+  }
+}
+
+// Flash messages
+.notice,
+.alert {
+  padding: 1rem 1.5rem;
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.notice {
+  background: rgba($success, 0.1);
+  border-bottom: 1px solid $success;
+  color: darken($success, 20%);
+}
+
+.alert {
+  background: rgba($danger, 0.1);
+  border-bottom: 1px solid $danger;
+  color: darken($danger, 20%);
+}
+
+// Expiration helpers
+.expired {
+  color: $expired;
+  font-weight: 600;
+}
+
+.expiring-soon {
+  color: $expiring-soon;
+  font-weight: 600;
+}
+
+.expiring-this-week {
+  color: $expiring-week;
+  font-weight: 600;
+}
+
+.fresh {
+  color: $fresh;
+  font-weight: 500;
+}
