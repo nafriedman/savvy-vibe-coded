@@ -2,22 +2,22 @@
   <div class="filter-section">
     <form id="filter-form" class="filter-form">
       <div class="filter-bar">
-        <!-- Search Input (left side, takes most space) -->
-        <div class="search-container">
+        <!-- Search Input -->
+        <div class="search-wrapper">
           <input
             type="text"
             name="search"
             id="search-input"
             class="search-input"
-            placeholder="Search by name..."
+            placeholder="Search food items..."
             value="<%= params[:search] %>"
           >
         </div>
 
-        <!-- Filters and Sort (right side) -->
-        <div class="filters-container">
+        <!-- Filters and Sort -->
+        <div class="filters-wrapper">
           <select name="status" id="status-select" class="filter-select">
-            <option value="">Status</option>
+            <option value="">All Status</option>
             <option value="available" <%= 'selected' if params[:status] == 'available' %>>Available</option>
             <option value="consumed" <%= 'selected' if params[:status] == 'consumed' %>>Consumed</option>
             <option value="thrown_out" <%= 'selected' if params[:status] == 'thrown_out' %>>Thrown Out</option>
@@ -25,29 +25,29 @@
           </select>
 
           <select name="category" id="category-select" class="filter-select">
-            <option value="">Category</option>
+            <option value="">All Categories</option>
             <option value="fresh" <%= 'selected' if params[:category] == 'fresh' %>>Fresh</option>
             <option value="prepared" <%= 'selected' if params[:category] == 'prepared' %>>Prepared</option>
             <option value="pantry" <%= 'selected' if params[:category] == 'pantry' %>>Pantry</option>
           </select>
 
           <select name="expiry_filter" id="expiry-select" class="filter-select">
-            <option value="">Expiry</option>
+            <option value="">All Items</option>
             <option value="expired" <%= 'selected' if params[:expiry_filter] == 'expired' %>>Expired</option>
-            <option value="expiring_soon" <%= 'selected' if params[:expiry_filter] == 'expiring_soon' %>>Soon (3d)</option>
-            <option value="expiring_week" <%= 'selected' if params[:expiry_filter] == 'expiring_week' %>>Week (7d)</option>
-            <option value="fresh" <%= 'selected' if params[:expiry_filter] == 'fresh' %>>Fresh (7d+)</option>
+            <option value="expiring_soon" <%= 'selected' if params[:expiry_filter] == 'expiring_soon' %>>Expiring Soon</option>
+            <option value="expiring_week" <%= 'selected' if params[:expiry_filter] == 'expiring_week' %>>This Week</option>
+            <option value="fresh" <%= 'selected' if params[:expiry_filter] == 'fresh' %>>Fresh</option>
           </select>
 
           <select name="sort" id="sort-select" class="filter-select">
             <option value="">Sort By</option>
-            <option value="expiration_date" <%= 'selected' if params[:sort] == 'expiration_date' %>>Exp. Date</option>
+            <option value="expiration_date" <%= 'selected' if params[:sort] == 'expiration_date' %>>Expiration</option>
             <option value="name" <%= 'selected' if params[:sort] == 'name' %>>Name</option>
             <option value="purchase_date" <%= 'selected' if params[:sort] == 'purchase_date' %>>Purchase Date</option>
           </select>
 
           <% if params[:search].present? || params[:sort].present? || params[:status].present? || params[:category].present? || params[:expiry_filter].present? %>
-            <a href="<%= food_items_path %>" class="filter-clear-btn">Clear</a>
+            <a href="<%= food_items_path %>" class="filter-clear-btn">Clear All</a>
           <% end %>
         </div>
       </div>
