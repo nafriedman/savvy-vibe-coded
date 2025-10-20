@@ -10,32 +10,60 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Filter Form - Handle filter changes with AJAX
+ * Filter Form - Handle filter changes and search with debouncing
  */
 function initializeFilterForm() {
   const filterForm = document.getElementById('filter-form');
   if (!filterForm) return;
 
   const selects = filterForm.querySelectorAll('select');
+  const searchInput = document.getElementById('search-input');
+  let searchTimeout;
 
+  // Handle select changes (immediate)
   selects.forEach(select => {
     select.addEventListener('change', function() {
-      // Build URL with query parameters
-      const formData = new FormData(filterForm);
-      const params = new URLSearchParams();
-
-      // Only add non-empty values
-      for (const [key, value] of formData.entries()) {
-        if (value) {
-          params.append(key, value);
-        }
-      }
-
-      // Navigate to the filtered URL
-      const url = params.toString() ? `/food_items?${params.toString()}` : '/food_items';
-      window.location.href = url;
+      applyFilters();
     });
   });
+
+  // Handle search input with debouncing (wait 500ms after user stops typing)
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        applyFilters();
+      }, 500);
+    });
+
+    // Also handle Enter key for immediate search
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        clearTimeout(searchTimeout);
+        applyFilters();
+      }
+    });
+  }
+
+  /**
+   * Apply current filters and navigate to filtered URL
+   */
+  function applyFilters() {
+    const formData = new FormData(filterForm);
+    const params = new URLSearchParams();
+
+    // Only add non-empty values
+    for (const [key, value] of formData.entries()) {
+      if (value && value.trim()) {
+        params.append(key, value);
+      }
+    }
+
+    // Navigate to the filtered URL
+    const url = params.toString() ? `/food_items?${params.toString()}` : '/food_items';
+    window.location.href = url;
+  }
 }
 
 /**
