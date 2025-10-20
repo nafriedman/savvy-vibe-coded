@@ -21,7 +21,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <%# Vanilla JavaScript - No frameworks! %>
-    <script src="/assets/application.js" defer></script>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
