@@ -211,15 +211,16 @@ body {
 }
 
 // Filter Section
+// Filter Section - Responsive Search & Filters
 .filter-section {
   background: white;
-  padding: 0.875rem 1rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px $shadow;
   margin-bottom: 1.5rem;
 
-  @media (max-width: 640px) {
-    padding: 0.75rem;
+  @media (max-width: 768px) {
+    padding: 0.875rem;
   }
 }
 
@@ -227,19 +228,87 @@ body {
   margin: 0;
 }
 
-.filter-compact {
+// Main filter bar container
+.filter-bar {
   display: flex;
   gap: 0.75rem;
+  align-items: stretch;
+
+  // Desktop: Single row with search on left, filters on right
+  @media (min-width: 769px) {
+    flex-direction: row;
+  }
+
+  // Mobile/Tablet: Two rows - search on top, filters below
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+// Search container (left side on desktop, top on mobile)
+.search-container {
+  flex: 1;
+  min-width: 0; // Allows flex item to shrink below content size
+
+  @media (min-width: 769px) {
+    flex: 1 1 auto;
+    max-width: 400px; // Limit search width on very large screens
+  }
+}
+
+// Search input
+.search-input {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border: 1px solid $border;
+  border-radius: 0.375rem;
+  font-size: 0.9375rem;
+  color: $text;
+  background: white;
+  transition: all 0.2s;
+  font-weight: 400;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:hover {
+    border-color: darken($border, 10%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+// Filters container (right side on desktop, bottom on mobile)
+.filters-container {
+  display: flex;
+  gap: 0.625rem;
   align-items: center;
   flex-wrap: wrap;
 
-  @media (max-width: 640px) {
+  @media (min-width: 769px) {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
+
+  @media (max-width: 768px) {
     gap: 0.5rem;
   }
 }
 
-.filter-compact-select {
-  padding: 0.5rem 0.75rem;
+// Individual filter select dropdowns
+.filter-select {
+  padding: 0.625rem 0.875rem;
   border: 1px solid $border;
   border-radius: 0.375rem;
   font-size: 0.875rem;
@@ -248,7 +317,8 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   font-weight: 500;
-  min-width: 120px;
+  white-space: nowrap;
+  flex-shrink: 0;
 
   &:hover {
     border-color: $primary;
@@ -260,15 +330,21 @@ body {
     box-shadow: 0 0 0 3px rgba($primary, 0.1);
   }
 
-  @media (max-width: 640px) {
+  @media (min-width: 769px) {
+    min-width: 110px;
+  }
+
+  @media (max-width: 768px) {
     font-size: 0.8125rem;
-    padding: 0.45rem 0.625rem;
-    min-width: 100px;
+    padding: 0.5rem 0.75rem;
+    flex: 1 1 auto;
+    min-width: 90px;
   }
 }
 
+// Clear filters button
 .filter-clear-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.625rem 1rem;
   background: rgba($text-muted, 0.1);
   color: $text-muted;
   border-radius: 0.375rem;
@@ -276,14 +352,16 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 
   &:hover {
     background: rgba($text-muted, 0.2);
     color: $text;
   }
 
-  @media (max-width: 640px) {
-    padding: 0.45rem 0.875rem;
+  @media (max-width: 768px) {
+    padding: 0.5rem 0.875rem;
     font-size: 0.8125rem;
   }
 }

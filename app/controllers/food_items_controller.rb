@@ -4,6 +4,12 @@ class FoodItemsController < ApplicationController
   def index
     @food_items = FoodItem.includes(:food)
 
+    # Search by name
+    if params[:search].present?
+      search_term = "%#{params[:search].downcase}%"
+      @food_items = @food_items.where('LOWER(food_items.name) LIKE ? OR LOWER(foods.name) LIKE ?', search_term, search_term)
+    end
+
     # Filter by status
     if params[:status].present?
       @food_items = @food_items.where(status: params[:status])
